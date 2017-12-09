@@ -13,10 +13,12 @@ import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.IDUtils;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
+import com.taotao.mapper.TbItemParamItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.pojo.TbItemExample.Criteria;
+import com.taotao.pojo.TbItemParamItem;
 import com.taotao.service.ItemService;
 
 /**
@@ -32,6 +34,9 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	private TbItemDescMapper itemDescMapper;
+
+	@Autowired
+	private TbItemParamItemMapper itemParamItemMapper;
 
 	/**
 	 * 根据ID查询商品
@@ -73,7 +78,7 @@ public class ItemServiceImpl implements ItemService {
 	 * @throws Exception
 	 */
 	@Override
-	public TaotaoResult createItem(TbItem item, String desc) throws Exception {
+	public TaotaoResult createItem(TbItem item, String desc, String itemParams) throws Exception {
 		// 生成商品Id
 		Long itemId = IDUtils.genItemId();
 		item.setId(itemId);
@@ -83,6 +88,10 @@ public class ItemServiceImpl implements ItemService {
 		// 商品信息插入数据库
 		itemMapper.insert(item);
 		TaotaoResult result = insertItemDesc(itemId, desc);
+		if (result.getStatus() != 200) {
+			throw new Exception();
+		}
+		result = insertItemParamItem(itemId, itemParams);
 		if (result.getStatus() != 200) {
 			throw new Exception();
 		}
@@ -101,6 +110,21 @@ public class ItemServiceImpl implements ItemService {
 		itemDesc.setCreated(new Date());
 		itemDesc.setUpdated(new Date());
 		itemDescMapper.insert(itemDesc);
+		return TaotaoResult.ok();
+	}
+
+	/**
+	 * 添加商品规格
+	 * 
+	 * @param desc
+	 */
+	private TaotaoResult insertItemParamItem(Long itemId, String itemParams) {
+		TbItemParamItem itemParamItem = new TbItemParamItem();
+		itemParamItem.setItemId(itemId);
+		itemParamItem.setParamData(itemParams);
+		itemParamItem.setCreated(new Date());
+		itemParamItem.setUpdated(new Date());
+		itemParamItemMapper.insert(itemParamItem);
 		return TaotaoResult.ok();
 	}
 }
