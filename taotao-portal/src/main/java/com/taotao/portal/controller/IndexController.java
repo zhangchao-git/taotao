@@ -1,5 +1,7 @@
 package com.taotao.portal.controller;
 
+import java.awt.PageAttributes.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +24,11 @@ public class IndexController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/httpclient/post", method = RequestMethod.POST)
+	@RequestMapping(value = "/httpclient/post", method = RequestMethod.POST, produces=org.springframework.http.MediaType.TEXT_PLAIN_VALUE+";charset=utf-8")
 	@ResponseBody
 	public String testPost(String name, String password) {
+		System.out.println("name:" + name + "\tpassword:" + password);
 		return "name:" + name + "\tpassword:" + password;
+		// return TaotaoResult.ok();
 	}
 }
