@@ -65,5 +65,4 @@ public class Item {
 	public void setItem_desc(String item_desc) {
 		this.item_desc = item_desc;
 	}
-
 }
