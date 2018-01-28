@@ -39,7 +39,7 @@
 		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
 	</bean>
 
-	<bean id="jedisClient" class="com.taotao.sso.dao.impl.JedisClientSingle"></bean>
+	<bean id="jedisClient" class="com.taotao.sso.pojo.impl.JedisClientSingle"></bean>
 	<!-- redis集群版配置 -->
 	<!-- <bean id="redisClient" class="redis.clients.jedis.JedisCluster"> <constructor-arg 
 		name="nodes"> <set> <bean class="redis.clients.jedis.HostAndPort"> <constructor-arg 
@@ -56,5 +56,5 @@
 		<constructor-arg name="host" value="192.168.25.153"></constructor-arg> <constructor-arg 
 		name="port" value="7006"></constructor-arg> </bean> </set> </constructor-arg> 
 		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg> 
-		</bean> <bean id="jedisClientCluster" class="com.taotao.sso.dao.impl.JedisClientCluster"></bean> -->
+		</bean> <bean id="jedisClientCluster" class="com.taotao.sso.pojo.impl.JedisClientCluster"></bean> -->
 </beans>
