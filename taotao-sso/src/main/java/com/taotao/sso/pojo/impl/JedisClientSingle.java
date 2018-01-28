@@ -1,9 +1,10 @@
-package com.taotao.sso.dao.impl;
+package com.taotao.sso.pojo.impl;
 
-import com.taotao.sso.dao.JedisClient;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.taotao.sso.pojo.JedisClient;
 
 public class JedisClientSingle implements JedisClient {
 

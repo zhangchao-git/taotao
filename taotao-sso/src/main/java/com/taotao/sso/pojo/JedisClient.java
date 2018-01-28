@@ -1,4 +1,4 @@
-package com.taotao.sso.dao;
+package com.taotao.sso.pojo;
 
 
 /**
